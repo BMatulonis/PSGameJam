@@ -9,9 +9,11 @@ signal gameOver
 const JUMP_VELOCITY = -350.0
 const JUMP_TIME = 0.2
 var timer = 0
-var in_shadow : bool = false
-var moving : bool = false
-var jumping : bool = false
+var facing_right := true
+var using_item := false
+var in_shadow := false
+var moving := false
+var jumping := false
 var jump_num = 0
 var stats = PlayerStats
 var max_health = stats.max_health
@@ -19,6 +21,8 @@ var max_health = stats.max_health
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+@onready var levelScene = get_tree().get_root().get_node("Level")
+@onready var potionScene = load("res://Scenes/shadow_potion.tscn")
 @onready var animation_player = %AnimationPlayer
 @onready var animation_tree = %AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
@@ -65,9 +69,11 @@ func _physics_process(delta):
 		animation_state.travel("jump")
 
 	var direction = Input.get_axis("left", "right")
-	if direction == 1:
+	if direction == 1:  # right
+		facing_right = true
 		$AnimatedSprite2D.flip_h = false
-	elif direction == -1:
+	elif direction == -1:  # left
+		facing_right = false
 		$AnimatedSprite2D.flip_h = true
 	if direction:
 		velocity.x = direction * speed
@@ -100,6 +106,20 @@ func _physics_process(delta):
 	else:
 		animation_tree.set("parameters/conditions/is_down", 0)
 
+	# throw
+	if Input.is_action_just_pressed("use_item"):
+		if !using_item:
+			get_node("../CanvasLayer/Item").visible = true
+			using_item = true
+		else:
+			get_node("../CanvasLayer/Item").visible = false
+			using_item = false
+
+	if Input.is_action_just_pressed("throw") and using_item:
+		get_node("../CanvasLayer/Item").visible = false
+		throw(facing_right)
+		using_item = false
+
 	move_and_slide()
 
 func get_gravity(velocity: Vector2):
@@ -111,6 +131,19 @@ func take_damage(value):
 	var old_health = stats.health
 	stats.health -= value
 	healthChanged.emit(old_health, stats.health)
+
+func throw(right):
+	var instance = potionScene.instantiate()
+	instance.spawnPos = global_position
+	if right:
+		instance.right = true
+		instance.spawnPos.x += 20
+	if !right:
+		instance.right = false
+		instance.spawnPos.x -= 20
+	instance.spawnPos.y -= 10
+	instance.spawnRot = rotation
+	levelScene.add_child.call_deferred(instance)
 
 func _on_area_2d_body_entered(body):
 	if body.has_meta("is_shadow"):

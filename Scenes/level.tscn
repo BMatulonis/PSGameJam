@@ -1,20 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs1owhfkl7x32"]
+[gd_scene load_steps=8 format=3 uid="uid://bs1owhfkl7x32"]
 
 [ext_resource type="PackedScene" uid="uid://clgq171oe43c2" path="res://Scenes/player.tscn" id="1_nql1e"]
 [ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="2_aleiy"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_4xg6d"]
-size = Vector2(500, 10)
+[ext_resource type="Texture2D" uid="uid://c8v022nnlwuos" path="res://Assets/Tiles/rock_01_light.png" id="3_f1vbc"]
+[ext_resource type="Texture2D" uid="uid://dcehoaq4r61mc" path="res://Assets/Tiles/rock_01_shadow.png" id="3_g8578"]
+[ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/potion_1.png" id="5_mp5oe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0meh"]
-size = Vector2(500, 8)
+size = Vector2(384, 24)
 
-[sub_resource type="Gradient" id="Gradient_xalyh"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x3qfl"]
-gradient = SubResource("Gradient_xalyh")
-fill_from = Vector2(0.495413, 1)
-fill_to = Vector2(0.481651, 0)
+[sub_resource type="TileSet" id="TileSet_sqkiq"]
 
 [node name="Level" type="Node2D"]
 
@@ -23,50 +18,101 @@ fill_to = Vector2(0.481651, 0)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Platform" type="StaticBody2D" parent="."]
-metadata/is_shadow = false
+metadata/is_shadow = true
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
-position = Vector2(0, 75)
-mesh = SubResource("QuadMesh_4xg6d")
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+texture_repeat = 2
+position = Vector2(0, 60)
+texture = ExtResource("3_g8578")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2(0, 75)
+position = Vector2(0, 57)
+scale = Vector2(0.25, 1)
 shape = SubResource("RectangleShape2D_s0meh")
 
 [node name="Platform2" type="StaticBody2D" parent="."]
-metadata/is_shadow = true
+metadata/is_shadow = false
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
-position = Vector2(108.5, 22)
-scale = Vector2(0.25, 1)
-mesh = SubResource("QuadMesh_4xg6d")
-texture = SubResource("GradientTexture2D_x3qfl")
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+texture_repeat = 2
+position = Vector2(96, 60)
+texture = ExtResource("3_f1vbc")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-position = Vector2(108.5, 22)
+position = Vector2(96, 57)
 scale = Vector2(0.25, 1)
 shape = SubResource("RectangleShape2D_s0meh")
 
 [node name="Platform3" type="StaticBody2D" parent="."]
 metadata/is_shadow = false
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform3"]
-position = Vector2(-107.5, -13)
-scale = Vector2(0.25, 1)
-mesh = SubResource("QuadMesh_4xg6d")
+[node name="Sprite2D" type="Sprite2D" parent="Platform3"]
+texture_repeat = 2
+position = Vector2(-96, 60)
+texture = ExtResource("3_f1vbc")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
-position = Vector2(-107.5, -13)
+position = Vector2(-96, 57)
+scale = Vector2(0.25, 1)
+shape = SubResource("RectangleShape2D_s0meh")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+metadata/is_shadow = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4"]
+texture_repeat = 2
+position = Vector2(-92, -80)
+texture = ExtResource("3_f1vbc")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(-92, -83)
+scale = Vector2(0.25, 1)
+shape = SubResource("RectangleShape2D_s0meh")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+metadata/is_shadow = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform5"]
+texture_repeat = 2
+position = Vector2(99, -29)
+texture = ExtResource("3_g8578")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+position = Vector2(99, -32)
 scale = Vector2(0.25, 1)
 shape = SubResource("RectangleShape2D_s0meh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="RichTextLabel" parent="CanvasLayer" node_paths=PackedStringArray("player")]
-offset_left = 4.0
-offset_right = 114.0
-offset_bottom = 30.0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 127.0
+offset_bottom = 46.0
 script = ExtResource("2_aleiy")
 player = NodePath("../../Player")
+
+[node name="Item" type="TextureRect" parent="CanvasLayer"]
+visible = false
+offset_left = 55.0
+offset_top = -5.0
+offset_right = 116.0
+offset_bottom = 57.0
+texture = ExtResource("5_mp5oe")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sqkiq")
+rendering_quadrant_size = 32
+format = 2
 
 [connection signal="healthChanged" from="Player" to="CanvasLayer/HealthBar" method="_on_player_health_changed"]
