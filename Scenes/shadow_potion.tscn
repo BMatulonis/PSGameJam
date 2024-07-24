@@ -1,22 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctqqpn3xu446"]
+[gd_scene load_steps=5 format=3 uid="uid://ctqqpn3xu446"]
 
-[ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/potion_1.png" id="1_wnatw"]
 [ext_resource type="Script" path="res://Scenes/shadow_potion.gd" id="1_ypcrk"]
+[ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="2_xkbuc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_877aw"]
 radius = 4.0
 height = 12.0
 
+[sub_resource type="Curve2D" id="Curve2D_rpg4o"]
+
 [node name="ShadowPotion" type="RigidBody2D"]
 script = ExtResource("1_ypcrk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_wnatw")
+texture = ExtResource("2_xkbuc")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_877aw")
 
+[node name="Path2D" type="Path2D" parent="."]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_rpg4o")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

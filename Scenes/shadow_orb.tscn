@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cn2u4h7fkw51n"]
+
+[ext_resource type="Texture2D" uid="uid://bi3xfqvq0wah8" path="res://Assets/Items/orb_bounce-Sheet.png" id="1_ag500"]
+[ext_resource type="Script" path="res://Scenes/shadow_orb.gd" id="2_0kdst"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dotkh"]
+atlas = ExtResource("1_ag500")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5hwf"]
+atlas = ExtResource("1_ag500")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8muq2"]
+atlas = ExtResource("1_ag500")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mafeu"]
+atlas = ExtResource("1_ag500")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0g0n2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dotkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5hwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8muq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mafeu")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6gf7m"]
+radius = 6.0
+
+[node name="ShadowOrb" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0g0n2")
+animation = &"bounce"
+autoplay = "bounce"
+script = ExtResource("2_0kdst")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6gf7m")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

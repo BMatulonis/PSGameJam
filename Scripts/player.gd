@@ -16,6 +16,7 @@ var moving := false
 var jumping := false
 var jump_num = 0
 var stats = PlayerStats
+var inventory = InventorySystem
 var max_health = stats.max_health
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -108,22 +109,20 @@ func _physics_process(delta):
 
 	# throw
 	if Input.is_action_just_pressed("use_item"):
-		if !using_item:
-			get_node("../CanvasLayer/Item").visible = true
+		if !using_item and inventory.shadowPotions > 0:
 			using_item = true
 		else:
-			get_node("../CanvasLayer/Item").visible = false
 			using_item = false
 
-	if Input.is_action_just_pressed("throw") and using_item:
-		get_node("../CanvasLayer/Item").visible = false
-		throw(facing_right)
+	if Input.is_action_just_pressed("throw") and using_item and inventory.shadowPotions > 0:
+		throw(global_position.direction_to(get_global_mouse_position()))
+		inventory.shadowPotions -= 1
 		using_item = false
 
 	move_and_slide()
 
-func get_gravity(velocity: Vector2):
-	if velocity.y < 0:
+func get_gravity(vel: Vector2):
+	if vel.y < 0:
 		return gravity
 	return fall_gravity
 
@@ -132,26 +131,26 @@ func take_damage(value):
 	stats.health -= value
 	healthChanged.emit(old_health, stats.health)
 
-func throw(right):
+func throw(dirThrown):
 	var instance = potionScene.instantiate()
 	instance.spawnPos = global_position
-	if right:
-		instance.right = true
-		instance.spawnPos.x += 20
-	if !right:
-		instance.right = false
-		instance.spawnPos.x -= 20
+	instance.dir = dirThrown
+	if dirThrown.x >= 0:
+		instance.spawnPos.x += 10
+	else:
+		instance.spawnPos.x -= 10
 	instance.spawnPos.y -= 10
 	instance.spawnRot = rotation
 	levelScene.add_child.call_deferred(instance)
-
-func _on_area_2d_body_entered(body):
-	if body.has_meta("is_shadow"):
-		if body.get_meta("is_shadow"):
-			in_shadow = true
-		else:
-			in_shadow = false
+	instance.connect("shadowAdded", _on_area_2d_body_shape_entered)
 
 func _on_player_stats_health_depleted():
 	gameOver.emit()
 	queue_free()
+
+func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if body is TileMap:
+		var cell = body.get_coords_for_body_rid(body_rid)
+		var data = body.get_cell_tile_data(0, cell)
+		if data:
+			in_shadow = data.get_custom_data("is_shadow")

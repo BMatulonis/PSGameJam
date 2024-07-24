@@ -5,6 +5,7 @@ var max_health
 
 func _ready():
 	max_health = player.max_health
+	append_text(str(max_health))
 
 func _on_player_health_changed(old_health, health):
 	health -= (old_health - health)
