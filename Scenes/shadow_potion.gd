@@ -37,7 +37,7 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 				#check neighbors
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
-	if body != get_node("../Player"):
+	if body != get_parent():
 		queue_free()
 
 func check_neighbors(body : TileMap, cell : Vector2i, side : int):

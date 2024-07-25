@@ -1,14 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs1owhfkl7x32"]
+[gd_scene load_steps=9 format=3 uid="uid://bs1owhfkl7x32"]
 
 [ext_resource type="PackedScene" uid="uid://clgq171oe43c2" path="res://Scenes/player.tscn" id="1_nql1e"]
-[ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="2_aleiy"]
 [ext_resource type="PackedScene" uid="uid://qpo8mg4r2li0" path="res://Scenes/trajectory_line.tscn" id="2_radie"]
-[ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="5_ge2bl"]
+[ext_resource type="PackedScene" uid="uid://xgo5lr0hk21y" path="res://Scenes/UI.tscn" id="6_1utbb"]
 [ext_resource type="PackedScene" uid="uid://cn2u4h7fkw51n" path="res://Scenes/shadow_orb.tscn" id="6_dpdg8"]
-[ext_resource type="Texture2D" uid="uid://cerbcetplkn6u" path="res://Assets/Items/orb.png" id="6_fva0r"]
-[ext_resource type="Script" path="res://Scenes/OrbCount.gd" id="7_uq5sw"]
-[ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="9_aj7iy"]
 [ext_resource type="Texture2D" uid="uid://pvly041x2eh4" path="res://Assets/Tiles/floor_tileset.png" id="10_1nxvu"]
+[ext_resource type="PackedScene" uid="uid://ko3aqeglx2vo" path="res://Scenes/door.tscn" id="10_esfl4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2ryp"]
 texture = ExtResource("10_1nxvu")
@@ -402,49 +399,6 @@ sources/0 = SubResource("TileSetAtlasSource_w2ryp")
 
 [node name="TrajectoryLine" parent="Player" instance=ExtResource("2_radie")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" type="RichTextLabel" parent="CanvasLayer" node_paths=PackedStringArray("player")]
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 127.0
-offset_bottom = 46.0
-script = ExtResource("2_aleiy")
-player = NodePath("../../Player")
-
-[node name="Item" type="TextureRect" parent="CanvasLayer"]
-offset_left = 55.0
-offset_top = -5.0
-offset_right = 116.0
-offset_bottom = 57.0
-texture = ExtResource("5_ge2bl")
-
-[node name="Orb" type="TextureRect" parent="CanvasLayer"]
-offset_left = 600.0
-offset_top = 1.0
-offset_right = 640.0
-offset_bottom = 41.0
-texture = ExtResource("6_fva0r")
-
-[node name="OrbCount" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -62.0
-offset_top = 9.0
-offset_right = -31.0
-offset_bottom = 33.0
-grow_horizontal = 0
-text_direction = 2
-script = ExtResource("7_uq5sw")
-
-[node name="ItemAmount" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 96.0
-offset_top = -1.0
-offset_right = 115.0
-offset_bottom = 23.0
-script = ExtResource("9_aj7iy")
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_sqkiq")
 rendering_quadrant_size = 32
@@ -463,4 +417,7 @@ position = Vector2(306, -240)
 [node name="ShadowOrb4" parent="." instance=ExtResource("6_dpdg8")]
 position = Vector2(433, -177)
 
-[connection signal="healthChanged" from="Player" to="CanvasLayer/HealthBar" method="_on_player_health_changed"]
+[node name="Door" parent="." instance=ExtResource("10_esfl4")]
+position = Vector2(80, 16)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("6_1utbb")]

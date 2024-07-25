@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://xgo5lr0hk21y"]
+
+[ext_resource type="Texture2D" uid="uid://cmxt631147d1t" path="res://Assets/UI/no health bar.png" id="1_c76ct"]
+[ext_resource type="Texture2D" uid="uid://b30fsy14753n7" path="res://Assets/UI/empty health bar.png" id="2_gq4mj"]
+[ext_resource type="Texture2D" uid="uid://ck7is6jy0ss6b" path="res://Assets/UI/health.png" id="3_1gdbs"]
+[ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="4_iqahx"]
+[ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="5_ay57e"]
+[ext_resource type="Texture2D" uid="uid://cerbcetplkn6u" path="res://Assets/Items/orb.png" id="6_lepkc"]
+[ext_resource type="Script" path="res://Scenes/OrbCount.gd" id="7_k2vfa"]
+[ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="8_pf63s"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 154.0
+offset_bottom = 37.0
+texture_under = ExtResource("1_c76ct")
+texture_over = ExtResource("2_gq4mj")
+texture_progress = ExtResource("3_1gdbs")
+script = ExtResource("4_iqahx")
+
+[node name="Item" type="TextureRect" parent="."]
+offset_left = -3.0
+offset_top = 41.0
+offset_right = 58.0
+offset_bottom = 103.0
+texture = ExtResource("5_ay57e")
+
+[node name="Orb" type="TextureRect" parent="."]
+offset_left = 600.0
+offset_top = 1.0
+offset_right = 640.0
+offset_bottom = 41.0
+texture = ExtResource("6_lepkc")
+
+[node name="OrbCount" type="RichTextLabel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_top = 9.0
+offset_right = -31.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text_direction = 2
+script = ExtResource("7_k2vfa")
+
+[node name="ItemAmount" type="RichTextLabel" parent="."]
+offset_left = 42.0
+offset_top = 41.0
+offset_right = 61.0
+offset_bottom = 65.0
+script = ExtResource("8_pf63s")

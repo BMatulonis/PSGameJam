@@ -1,17 +1,12 @@
-extends RichTextLabel
+extends TextureProgressBar
 
-@export var player: CharacterBody2D
-var max_health
+@export var player : CharacterBody2D
 
 func _ready():
-	max_health = player.max_health
-	append_text(str(max_health))
+	player = get_node("../../Player")
+	self.player.connect("healthChanged", _on_player_health_changed)
+	max_value = player.max_health
+	value = max_value
 
 func _on_player_health_changed(old_health, health):
-	health -= (old_health - health)
-	if health > max_health:
-		health = max_health
-	if health <= 0:
-		health = 0
-	clear()
-	append_text(str(health))
+	value -= (old_health - health)

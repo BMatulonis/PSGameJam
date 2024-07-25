@@ -22,7 +22,7 @@ var max_health = stats.max_health
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var levelScene = get_tree().get_root().get_node("Level")
+@onready var levelScene = get_tree().get_root().get_child(0)
 @onready var potionScene = load("res://Scenes/shadow_potion.tscn")
 @onready var animation_player = %AnimationPlayer
 @onready var animation_tree = %AnimationTree
@@ -108,7 +108,7 @@ func _physics_process(delta):
 		animation_tree.set("parameters/conditions/is_down", 0)
 
 	# throw
-	if Input.is_action_just_pressed("use_item"):
+	if Input.is_action_just_pressed("use_item") and get_tree().current_scene.name != "ShopLevel":
 		if !using_item and inventory.shadowPotions > 0:
 			using_item = true
 		else:
