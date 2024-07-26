@@ -3,6 +3,13 @@ extends CharacterBody2D
 signal healthChanged
 signal gameOver
 
+enum{
+	EMPTY = 0,
+	SHADOW = 1,
+	FIRE = 2,
+	ICE = 3
+}
+
 @export var shadow_damage : float = 1
 @export var speed : float = 150.0
 @export var fall_gravity : float = 1200
@@ -23,7 +30,8 @@ var max_health = stats.max_health
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var levelScene = get_tree().get_root().get_child(0)
-@onready var potionScene = load("res://Scenes/shadow_potion.tscn")
+@onready var shadowPotion = load("res://Scenes/shadow_potion.tscn")
+@onready var firePotion = load("res://Scenes/fire_potion.tscn")
 @onready var animation_player = %AnimationPlayer
 @onready var animation_tree = %AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
@@ -107,16 +115,26 @@ func _physics_process(delta):
 	else:
 		animation_tree.set("parameters/conditions/is_down", 0)
 
+	# selecting item / inventory
+	if Input.is_action_just_pressed("change_item"):
+		using_item = false
+		var temp = inventory.item1
+		inventory.item1 = inventory.item2
+		inventory.item2 = temp
+
 	# throw
 	if Input.is_action_just_pressed("use_item") and get_tree().current_scene.name != "ShopLevel":
-		if !using_item and inventory.shadowPotions > 0:
+		if !using_item and inventory.item1 > 0:
 			using_item = true
 		else:
 			using_item = false
 
-	if Input.is_action_just_pressed("throw") and using_item and inventory.shadowPotions > 0:
-		throw(global_position.direction_to(get_global_mouse_position()))
-		inventory.shadowPotions -= 1
+	if Input.is_action_just_pressed("throw") and using_item:
+		# check what type of potion is in slot one
+		if inventory.item1 == SHADOW and inventory.shadowPotions > 0:
+			throw(global_position.direction_to(get_global_mouse_position()), SHADOW)
+		if inventory.item1 == FIRE and inventory.firePotions > 0:
+			throw(global_position.direction_to(get_global_mouse_position()), FIRE)
 		using_item = false
 
 	move_and_slide()
@@ -131,18 +149,25 @@ func take_damage(value):
 	stats.health -= value
 	healthChanged.emit(old_health, stats.health)
 
-func throw(dirThrown):
-	var instance = potionScene.instantiate()
+func throw(dirThrown : Vector2, potion : int):
+	var instance
+	if potion == SHADOW:
+		instance = shadowPotion.instantiate()
+		inventory.shadowPotions -= 1
+	if potion == FIRE:
+		instance = firePotion.instantiate()
+		inventory.firePotions -= 1
 	instance.spawnPos = global_position
 	instance.dir = dirThrown
 	if dirThrown.x >= 0:
-		instance.spawnPos.x += 10
+		instance.spawnPos.x += 15
 	else:
-		instance.spawnPos.x -= 10
+		instance.spawnPos.x -= 15
 	instance.spawnPos.y -= 10
 	instance.spawnRot = rotation
 	levelScene.add_child.call_deferred(instance)
-	instance.connect("shadowAdded", _on_area_2d_body_shape_entered)
+	if potion == SHADOW:
+		instance.connect("shadowAdded", _on_area_2d_body_shape_entered)
 
 func _on_player_stats_health_depleted():
 	gameOver.emit()

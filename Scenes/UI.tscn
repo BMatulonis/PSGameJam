@@ -1,13 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://xgo5lr0hk21y"]
+[gd_scene load_steps=13 format=3 uid="uid://xgo5lr0hk21y"]
 
 [ext_resource type="Texture2D" uid="uid://cmxt631147d1t" path="res://Assets/UI/no health bar.png" id="1_c76ct"]
 [ext_resource type="Texture2D" uid="uid://b30fsy14753n7" path="res://Assets/UI/empty health bar.png" id="2_gq4mj"]
 [ext_resource type="Texture2D" uid="uid://ck7is6jy0ss6b" path="res://Assets/UI/health.png" id="3_1gdbs"]
 [ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="4_iqahx"]
 [ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="5_ay57e"]
+[ext_resource type="Script" path="res://Scenes/Item.gd" id="6_7acg7"]
 [ext_resource type="Texture2D" uid="uid://cerbcetplkn6u" path="res://Assets/Items/orb.png" id="6_lepkc"]
 [ext_resource type="Script" path="res://Scenes/OrbCount.gd" id="7_k2vfa"]
 [ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="8_pf63s"]
+[ext_resource type="Texture2D" uid="uid://cpcmucq2yc6oi" path="res://Assets/UI/item_box.png" id="10_xx1yn"]
+
+[sub_resource type="SystemFont" id="SystemFont_jlroe"]
+font_names = PackedStringArray("ThaleahFat")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_bls1f"]
+font_names = PackedStringArray("ThaleahFat")
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -21,35 +30,61 @@ texture_over = ExtResource("2_gq4mj")
 texture_progress = ExtResource("3_1gdbs")
 script = ExtResource("4_iqahx")
 
-[node name="Item" type="TextureRect" parent="."]
-offset_left = -3.0
-offset_top = 41.0
-offset_right = 58.0
-offset_bottom = 103.0
+[node name="Items" type="Node" parent="."]
+
+[node name="Item" type="TextureRect" parent="Items"]
+z_index = 2
+offset_left = 7.0
+offset_top = 29.0
+offset_right = 68.0
+offset_bottom = 91.0
 texture = ExtResource("5_ay57e")
+script = ExtResource("6_7acg7")
+metadata/_edit_use_anchors_ = true
 
-[node name="Orb" type="TextureRect" parent="."]
-offset_left = 600.0
-offset_top = 1.0
-offset_right = 640.0
-offset_bottom = 41.0
-texture = ExtResource("6_lepkc")
-
-[node name="OrbCount" type="RichTextLabel" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -62.0
-offset_top = 9.0
-offset_right = -31.0
-offset_bottom = 33.0
-grow_horizontal = 0
-text_direction = 2
-script = ExtResource("7_k2vfa")
-
-[node name="ItemAmount" type="RichTextLabel" parent="."]
-offset_left = 42.0
-offset_top = 41.0
-offset_right = 61.0
-offset_bottom = 65.0
+[node name="ItemAmount" type="RichTextLabel" parent="Items"]
+offset_left = 45.0
+offset_top = 40.0
+offset_right = 55.0
+offset_bottom = 51.0
+theme_override_fonts/normal_font = SubResource("SystemFont_jlroe")
+fit_content = true
 script = ExtResource("8_pf63s")
+
+[node name="ItemBox" type="TextureRect" parent="Items"]
+z_index = 1
+offset_left = 18.0
+offset_top = 38.0
+offset_right = 58.0
+offset_bottom = 78.0
+texture = ExtResource("10_xx1yn")
+
+[node name="Orbs" type="Node" parent="."]
+
+[node name="Orb" type="TextureRect" parent="Orbs"]
+z_index = 2
+offset_left = 592.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 48.0
+texture = ExtResource("6_lepkc")
+metadata/_edit_group_ = true
+
+[node name="OrbCount" type="RichTextLabel" parent="Orbs"]
+offset_left = 619.0
+offset_top = 10.0
+offset_right = 628.0
+offset_bottom = 19.0
+theme_override_fonts/normal_font = SubResource("SystemFont_bls1f")
+fit_content = true
+script = ExtResource("7_k2vfa")
+metadata/_edit_group_ = true
+
+[node name="ItemBox2" type="TextureRect" parent="Orbs"]
+z_index = 1
+offset_left = 592.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 48.0
+texture = ExtResource("10_xx1yn")
+metadata/_edit_group_ = true

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0h0yw0c64dww" path="res://Assets/Player/blob_up-Sheet.png" id="6_r35gi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_be87a"]
-radius = 8.06226
+radius = 9.05539
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u1aox"]
 animation = &"down"
@@ -398,9 +398,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_cml8p"]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_vpt7x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 shape = SubResource("CircleShape2D_be87a")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
