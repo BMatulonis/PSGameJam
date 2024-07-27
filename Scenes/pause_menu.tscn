@@ -1,0 +1,171 @@
+[gd_scene load_steps=5 format=3 uid="uid://gciy433d8knc"]
+
+[ext_resource type="Script" path="res://Scenes/pause_menu.gd" id="1_1y5o0"]
+[ext_resource type="PackedScene" uid="uid://bvi45m12lfbqe" path="res://Scenes/options_menu.tscn" id="2_wy5a6"]
+
+[sub_resource type="SystemFont" id="SystemFont_w3b5q"]
+font_names = PackedStringArray("ThaleahFat")
+
+[sub_resource type="SystemFont" id="SystemFont_ef4kf"]
+font_names = PackedStringArray("ThaleahFat")
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1y5o0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.176419, 0.176419, 0.176419, 0.517647)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_font_sizes/font_size = 48
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Seperator5" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Seperator6" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Seperator7" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Seperator8" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_font_sizes/font_size = 32
+text = "Are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_font_sizes/font_size = 20
+text = "Unsaved progress will be lost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Quit to Main Menu"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Quit to Desktop"
+
+[node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_wy5a6")]
+visible = false
+layout_mode = 1
+
+[connection signal="backPressed" from="OptionsMenu" to="." method="_on_options_menu_back_pressed"]

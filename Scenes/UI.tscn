@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://xgo5lr0hk21y"]
+[gd_scene load_steps=14 format=3 uid="uid://xgo5lr0hk21y"]
 
-[ext_resource type="Texture2D" uid="uid://cmxt631147d1t" path="res://Assets/UI/no health bar.png" id="1_c76ct"]
-[ext_resource type="Texture2D" uid="uid://b30fsy14753n7" path="res://Assets/UI/empty health bar.png" id="2_gq4mj"]
+[ext_resource type="Texture2D" uid="uid://civbw2x2fdb2d" path="res://Assets/UI/no_health.png" id="1_mxjas"]
+[ext_resource type="Texture2D" uid="uid://dbwaadjy5wju0" path="res://Assets/UI/empty_health.png" id="2_u5gho"]
 [ext_resource type="Texture2D" uid="uid://ck7is6jy0ss6b" path="res://Assets/UI/health.png" id="3_1gdbs"]
 [ext_resource type="Script" path="res://Scenes/HealthBar.gd" id="4_iqahx"]
 [ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="5_ay57e"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/OrbCount.gd" id="7_k2vfa"]
 [ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="8_pf63s"]
 [ext_resource type="Texture2D" uid="uid://cpcmucq2yc6oi" path="res://Assets/UI/item_box.png" id="10_xx1yn"]
+[ext_resource type="PackedScene" uid="uid://gciy433d8knc" path="res://Scenes/pause_menu.tscn" id="11_3cqwn"]
 
 [sub_resource type="SystemFont" id="SystemFont_jlroe"]
 font_names = PackedStringArray("ThaleahFat")
@@ -17,16 +18,17 @@ subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_bls1f"]
 font_names = PackedStringArray("ThaleahFat")
+subpixel_positioning = 0
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 154.0
-offset_bottom = 37.0
-texture_under = ExtResource("1_c76ct")
-texture_over = ExtResource("2_gq4mj")
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 138.0
+offset_bottom = 42.0
+texture_under = ExtResource("1_mxjas")
+texture_over = ExtResource("2_u5gho")
 texture_progress = ExtResource("3_1gdbs")
 script = ExtResource("4_iqahx")
 
@@ -34,47 +36,54 @@ script = ExtResource("4_iqahx")
 
 [node name="Item" type="TextureRect" parent="Items"]
 z_index = 2
-offset_left = 7.0
-offset_top = 29.0
-offset_right = 68.0
-offset_bottom = 91.0
+offset_left = 15.0
+offset_top = 46.0
+offset_right = 54.0
+offset_bottom = 85.0
 texture = ExtResource("5_ay57e")
 script = ExtResource("6_7acg7")
-metadata/_edit_use_anchors_ = true
 
 [node name="ItemAmount" type="RichTextLabel" parent="Items"]
-offset_left = 45.0
-offset_top = 40.0
-offset_right = 55.0
-offset_bottom = 51.0
+offset_left = 43.0
+offset_top = 47.0
+offset_right = 53.0
+offset_bottom = 59.0
 theme_override_fonts/normal_font = SubResource("SystemFont_jlroe")
 fit_content = true
 script = ExtResource("8_pf63s")
 
 [node name="ItemBox" type="TextureRect" parent="Items"]
 z_index = 1
-offset_left = 18.0
-offset_top = 38.0
-offset_right = 58.0
-offset_bottom = 78.0
+offset_left = 15.0
+offset_top = 46.0
+offset_right = 55.0
+offset_bottom = 86.0
 texture = ExtResource("10_xx1yn")
 
 [node name="Orbs" type="Node" parent="."]
 
 [node name="Orb" type="TextureRect" parent="Orbs"]
 z_index = 2
-offset_left = 592.0
-offset_top = 8.0
-offset_right = 632.0
-offset_bottom = 48.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+grow_horizontal = 0
 texture = ExtResource("6_lepkc")
 metadata/_edit_group_ = true
 
 [node name="OrbCount" type="RichTextLabel" parent="Orbs"]
-offset_left = 619.0
-offset_top = 10.0
-offset_right = 628.0
-offset_bottom = 19.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = 23.0
+grow_horizontal = 0
 theme_override_fonts/normal_font = SubResource("SystemFont_bls1f")
 fit_content = true
 script = ExtResource("7_k2vfa")
@@ -82,9 +91,16 @@ metadata/_edit_group_ = true
 
 [node name="ItemBox2" type="TextureRect" parent="Orbs"]
 z_index = 1
-offset_left = 592.0
-offset_top = 8.0
-offset_right = 632.0
-offset_bottom = 48.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+grow_horizontal = 0
 texture = ExtResource("10_xx1yn")
 metadata/_edit_group_ = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_3cqwn")]
+process_mode = 3
