@@ -16,6 +16,8 @@ enum{
 const JUMP_VELOCITY = -350.0
 const JUMP_TIME = 0.2
 var timer = 0
+var sound_timer = 0
+var sound_played := false
 var facing_right := true
 var using_item := false
 var in_shadow := false
@@ -38,6 +40,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	self.stats.connect("health_depleted", _on_player_stats_health_depleted)
+	self.inventory.connect("orbsChanged", _on_orb_changed)
 	animation_tree.active = true
 
 func _physics_process(delta):
@@ -56,26 +59,29 @@ func _physics_process(delta):
 			if stats.health < max_health:
 				take_damage(-shadow_damage)
 
-	# handle jumping
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y = JUMP_VELOCITY / 4
+	# handle jumping (no jumping in shop)
+	if !stats.in_shop:
+		if Input.is_action_just_released("jump") and velocity.y < 0:
+			velocity.y = JUMP_VELOCITY / 4
 
-	# double jump
-	if Input.is_action_just_pressed("jump") and !is_on_floor() and jump_num == 1:
-		jump_num += 1
-		velocity.y = JUMP_VELOCITY
-		animation_state.travel("RESET")
-		animation_state.travel("jump")
+		# double jump
+		if Input.is_action_just_pressed("jump") and !is_on_floor() and jump_num == 1:
+			$JumpSound.play()
+			jump_num += 1
+			velocity.y = JUMP_VELOCITY
+			animation_state.travel("RESET")
+			animation_state.travel("jump")
 
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or timer <= JUMP_TIME) and jump_num < 1:
-		timer = JUMP_TIME + 1
-		jump_num += 1
-		velocity.y = JUMP_VELOCITY
-		jumping = true
-		animation_tree.set("parameters/conditions/idle", 0)
-		animation_tree.set("parameters/conditions/is_moving", 0)
-		animation_tree.set("parameters/conditions/is_jumping", 1)
-		animation_state.travel("jump")
+		if Input.is_action_just_pressed("jump") and (is_on_floor() or timer <= JUMP_TIME) and jump_num < 1:
+			$JumpSound.play()
+			timer = JUMP_TIME + 1
+			jump_num += 1
+			velocity.y = JUMP_VELOCITY
+			jumping = true
+			animation_tree.set("parameters/conditions/idle", 0)
+			animation_tree.set("parameters/conditions/is_moving", 0)
+			animation_tree.set("parameters/conditions/is_jumping", 1)
+			animation_state.travel("jump")
 
 	# movement (if in shop, no movement)
 	var direction = Input.get_axis("left", "right")
@@ -150,6 +156,17 @@ func take_damage(value):
 	var old_health = stats.health
 	stats.health -= value
 	healthChanged.emit(old_health, stats.health)
+	if value > 0:
+		sound_played = false
+		if sound_timer == 0.0:
+			$HurtSound.play()
+		if sound_timer >= 1.0:
+			sound_timer = 0.0
+		else:
+			sound_timer += 0.03
+	if value < 0 and !sound_played:
+		$HealSound.play()
+		sound_played = true
 
 func throw(dirThrown : Vector2, potion : int):
 	var instance
@@ -168,12 +185,23 @@ func throw(dirThrown : Vector2, potion : int):
 	instance.spawnPos.y -= 10
 	instance.spawnRot = rotation
 	levelScene.add_child.call_deferred(instance)
+	instance.connect("potionSplash", _on_potion_splash)
 	if potion == SHADOW:
 		instance.connect("shadowAdded", _on_area_2d_body_shape_entered)
+
+func _on_potion_splash():
+	$PotionSplash.play()
 
 func _on_player_stats_health_depleted():
 	gameOver.emit()
 	queue_free()
+
+func _on_orb_changed():
+	if (inventory.orbs - inventory.old_orbs) > 0:
+		$PickupSound.play()
+	else:
+		$BuySound.play()
+	inventory.old_orbs = inventory.orbs
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body is TileMap:
@@ -181,3 +209,6 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 		var data = body.get_cell_tile_data(0, cell)
 		if data:
 			in_shadow = data.get_custom_data("is_shadow")
+
+func _on_floating_potion_potion_pickup():
+	$PickupSound.play()

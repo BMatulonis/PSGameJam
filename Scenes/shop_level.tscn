@@ -561,6 +561,7 @@ grow_vertical = 2
 next_text = NodePath("../Dialogue2")
 shop_list = NodePath("../ShopList")
 timer_increment = 0.006
+skippable = true
 
 [node name="Dialogue2" parent="." node_paths=PackedStringArray("prev_text", "next_text", "shop_list") instance=ExtResource("6_qi218")]
 visible = false
@@ -577,6 +578,7 @@ next_text = NodePath("../Dialogue3")
 shop_list = NodePath("../ShopList")
 timer_increment = 0.005
 text_speed = 0.5
+skippable = true
 
 [node name="Dialogue3" parent="." node_paths=PackedStringArray("prev_text", "shop_list") instance=ExtResource("6_qi218")]
 visible = false
@@ -591,6 +593,7 @@ custom_text = "Please, buy something..."
 prev_text = NodePath("../Dialogue2")
 shop_list = NodePath("../ShopList")
 timer_increment = 0.006
+skippable = true
 
 [node name="ShopList" type="VBoxContainer" parent="."]
 visible = false

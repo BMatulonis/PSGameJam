@@ -16,10 +16,12 @@ enum{
 
 enum{
 	DEFAULT_ORBS = 0,
-	DEFAULT_SHADOW = 5,
-	DEFAULT_FIRE = 4,
-	DEFAULT_ICE = 3
+	DEFAULT_SHADOW = 0,
+	DEFAULT_FIRE = 0,
+	DEFAULT_ICE = 0
 }
+
+var old_orbs := 0
 
 @onready var item1 = SHADOW:
 	get:

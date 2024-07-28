@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal potionSplash
+
 var spawnPos : Vector2
 var spawnRot : float
 var path = Path2D
@@ -24,4 +26,5 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	print("fire effect")
 	if body != get_parent():
+		potionSplash.emit()
 		queue_free()

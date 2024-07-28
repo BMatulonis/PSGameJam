@@ -6,7 +6,7 @@ extends Control
 @onready var exitButton = $MarginContainer/HBoxContainer/VBoxContainer/ExitButton as Button
 @onready var margin_container = $MarginContainer
 @onready var options_menu = $OptionsMenu
-@onready var startLevel = preload("res://Scenes/level.tscn")
+@onready var startLevel = preload("res://Scenes/Levels/level_1.tscn")
 
 func _ready():
 	startButton.button_down.connect(_on_start_pressed)

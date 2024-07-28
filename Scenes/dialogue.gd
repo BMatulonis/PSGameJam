@@ -6,7 +6,11 @@ extends Control
 @export var shop_list : VBoxContainer
 @export var timer_increment := 0.01
 @export var text_speed := 0.6
+@export var skippable := false
+@export var fontSize := 24
+@export var collisionFlag : Area2D
 
+var flag_passed := false
 var leaving_shop := false
 var current_text : bool
 var final_text : bool
@@ -15,7 +19,8 @@ var timer := 0.0
 
 func _ready():
 	$Label.text = custom_text
-	if !prev_text:
+	$Label.set("theme_override_font_sizes/font_size", fontSize)
+	if !prev_text and !collisionFlag:
 		self.visible = true
 		current_text = true
 	else:
@@ -27,7 +32,7 @@ func _ready():
 		final_text = false
 
 func _process(delta):
-	if Input.is_action_just_pressed("skip") and current_text and !leaving_shop:
+	if Input.is_action_just_pressed("skip") and current_text and !leaving_shop and skippable:
 		$Label.visible_ratio = 1
 	if $Label.visible_ratio < 1 and current_text:
 		$Label.visible_ratio += text_speed * delta
@@ -46,6 +51,11 @@ func _process(delta):
 		visible_char = $Label.visible_characters
 		$AudioStreamPlayer2D.play()
 
+func _on_flag_entered():
+	flag_passed = true
+	self.visible = true
+	self.current_text = true
+
 func move_to_next_text() -> void:
 	self.current_text = false
 	self.visible = false
@@ -57,3 +67,19 @@ func _on_shop_list_leave_leave_shop():
 	self.visible = true
 	current_text = true
 	final_text = true
+
+func _on_collision_flag_body_entered(body):
+	if !flag_passed:
+		_on_flag_entered()
+
+func _on_collision_flag_2_body_entered(body):
+	if !flag_passed:
+		_on_flag_entered()
+
+func _on_collision_flag_3_body_entered(body):
+	if !flag_passed:
+		_on_flag_entered()
+
+func _on_collision_flag_4_body_entered(body):
+	if !flag_passed:
+		_on_flag_entered()

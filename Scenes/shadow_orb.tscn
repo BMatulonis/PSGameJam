@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn2u4h7fkw51n"]
+[gd_scene load_steps=10 format=3 uid="uid://cn2u4h7fkw51n"]
 
 [ext_resource type="Texture2D" uid="uid://bi3xfqvq0wah8" path="res://Assets/Items/orb_bounce-Sheet.png" id="1_ag500"]
 [ext_resource type="Script" path="res://Scenes/shadow_orb.gd" id="2_0kdst"]
+[ext_resource type="AudioStream" uid="uid://bs2ss18576x22" path="res://Assets/sfx/pickupOrb.wav" id="3_x08qs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dotkh"]
 atlas = ExtResource("1_ag500")
@@ -53,5 +54,9 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_6gf7m")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_x08qs")
+bus = &"Sound"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

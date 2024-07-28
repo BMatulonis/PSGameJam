@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://skxxw70q37xr"]
+
+[ext_resource type="Texture2D" uid="uid://bs2auns5g8ikx" path="res://Assets/Items/potion_1_floating-Sheet.png" id="1_wma8r"]
+[ext_resource type="Script" path="res://Scenes/floating_potion.gd" id="2_7xx02"]
+[ext_resource type="AudioStream" uid="uid://bs2ss18576x22" path="res://Assets/sfx/pickupOrb.wav" id="2_xtavq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty0uc"]
+atlas = ExtResource("1_wma8r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3ucv"]
+atlas = ExtResource("1_wma8r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sfo3"]
+atlas = ExtResource("1_wma8r")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcuhr"]
+atlas = ExtResource("1_wma8r")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3tvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty0uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3ucv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sfo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcuhr")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gbjgt"]
+radius = 8.0
+
+[node name="FloatingPotion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_g3tvu")
+animation = &"bounce"
+autoplay = "bounce"
+script = ExtResource("2_7xx02")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gbjgt")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xtavq")
+bus = &"Sound"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 signal shadowAdded(body_rid, body, body_shape_index, local_shape_index)
+signal potionSplash
 
 var spawnPos : Vector2
 var spawnRot : float
@@ -38,6 +39,7 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
 	if body != get_parent():
+		potionSplash.emit()
 		queue_free()
 
 func check_neighbors(body : TileMap, cell : Vector2i, side : int):
