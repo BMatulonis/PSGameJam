@@ -419,5 +419,6 @@ position = Vector2(433, -177)
 
 [node name="Door" parent="." instance=ExtResource("10_esfl4")]
 position = Vector2(80, 16)
+next_level = "res://Scenes/shop_level.tscn"
 
 [node name="CanvasLayer" parent="." instance=ExtResource("6_1utbb")]

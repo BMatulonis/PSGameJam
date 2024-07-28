@@ -12,5 +12,7 @@ signal health_depleted
 		if health <= 0:
 			health_depleted.emit()
 
+@onready var in_shop := false
+
 func reset_stats():
 	health = max_health

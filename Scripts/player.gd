@@ -77,27 +77,29 @@ func _physics_process(delta):
 		animation_tree.set("parameters/conditions/is_jumping", 1)
 		animation_state.travel("jump")
 
+	# movement (if in shop, no movement)
 	var direction = Input.get_axis("left", "right")
-	if direction == 1:  # right
-		facing_right = true
-		$AnimatedSprite2D.flip_h = false
-	elif direction == -1:  # left
-		facing_right = false
-		$AnimatedSprite2D.flip_h = true
-	if direction:
-		velocity.x = direction * speed
-		if !jumping:
-			moving = true
-			animation_tree.set("parameters/conditions/idle", 0)
-			animation_tree.set("parameters/conditions/is_moving", 1)
-			animation_state.travel("move")
-	else:
-		if !jumping:
-			moving = false
-			animation_tree.set("parameters/conditions/idle", 1)
-			animation_tree.set("parameters/conditions/is_moving", 0)
-			animation_state.travel("idle")
-		velocity.x = move_toward(velocity.x, 0, speed)
+	if !stats.in_shop:
+		if direction == 1:  # right
+			facing_right = true
+			$AnimatedSprite2D.flip_h = false
+		elif direction == -1:  # left
+			facing_right = false
+			$AnimatedSprite2D.flip_h = true
+		if direction:
+			velocity.x = direction * speed
+			if !jumping:
+				moving = true
+				animation_tree.set("parameters/conditions/idle", 0)
+				animation_tree.set("parameters/conditions/is_moving", 1)
+				animation_state.travel("move")
+		else:
+			if !jumping:
+				moving = false
+				animation_tree.set("parameters/conditions/idle", 1)
+				animation_tree.set("parameters/conditions/is_moving", 0)
+				animation_state.travel("idle")
+			velocity.x = move_toward(velocity.x, 0, speed)
 
 	# look up
 	if Input.is_action_pressed("up") and is_on_floor() and !moving and !jumping:
