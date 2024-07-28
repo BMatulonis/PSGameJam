@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://dxlk587qt2v1n" path="res://Assets/main theme.wav" id="1_kskxv"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D"]
-process_mode = 3
+process_mode = 4
 stream = ExtResource("1_kskxv")
 autoplay = true
 bus = &"Music"

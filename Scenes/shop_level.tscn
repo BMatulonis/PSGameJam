@@ -531,3 +531,9 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_sx6we")
+
+[node name="Dialogue" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Dialogue"]
+offset_right = 40.0
+offset_bottom = 23.0
