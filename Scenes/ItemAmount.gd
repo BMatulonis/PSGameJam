@@ -8,7 +8,7 @@ enum{
 }
 
 var inventory = InventorySystem
-var count
+var count = 0
 
 func _ready():
 	inventory.connect("shadowPotChanged", _on_item_changed)
@@ -18,6 +18,10 @@ func _ready():
 		count = inventory.shadowPotions
 	elif inventory.item1 == FIRE:
 		count = inventory.firePotions
+	elif inventory.item1 == ICE:
+		count = inventory.icePotions
+	else:
+		count = 0
 	append_text(str(count))
 
 func _on_item_changed():
@@ -25,5 +29,9 @@ func _on_item_changed():
 		count = inventory.shadowPotions
 	elif inventory.item1 == FIRE:
 		count = inventory.firePotions
+	elif inventory.item1 == ICE:
+		count = inventory.icePotions
+	else:
+		count = 0
 	clear()
 	append_text(str(count))

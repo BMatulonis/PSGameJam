@@ -1,15 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://ko3aqeglx2vo"]
+[gd_scene load_steps=9 format=3 uid="uid://ko3aqeglx2vo"]
 
-[ext_resource type="Texture2D" uid="uid://bpb88kputj0hl" path="res://Assets/Tiles/door.png" id="1_8jbcq"]
+[ext_resource type="Texture2D" uid="uid://cxbml0lsq7rpd" path="res://Assets/Tiles/door-Sheet.png" id="1_vxahs"]
 [ext_resource type="Script" path="res://Scenes/door.gd" id="2_qcmna"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noqep"]
+atlas = ExtResource("1_vxahs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j4rh"]
+atlas = ExtResource("1_vxahs")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlqv5"]
+atlas = ExtResource("1_vxahs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i54j"]
+atlas = ExtResource("1_vxahs")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ttjcn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noqep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j4rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlqv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i54j")
+}],
+"loop": true,
+"name": &"shimmer",
+"speed": 6.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gt1tx"]
 radius = 8.0
 height = 26.0
 
-[node name="Door" type="Sprite2D"]
+[node name="Door" type="AnimatedSprite2D"]
 z_index = -1
-texture = ExtResource("1_8jbcq")
+sprite_frames = SubResource("SpriteFrames_ttjcn")
+animation = &"shimmer"
+autoplay = "shimmer"
+frame_progress = 0.68488
 script = ExtResource("2_qcmna")
 
 [node name="Area2D" type="Area2D" parent="."]

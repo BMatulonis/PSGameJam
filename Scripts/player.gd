@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal healthChanged
 signal gameOver
+signal respawn
+signal newSpawn
 
 enum{
 	EMPTY = 0,
@@ -13,6 +15,8 @@ enum{
 @export var shadow_damage : float = 1
 @export var speed : float = 150.0
 @export var fall_gravity : float = 1200
+@export var spawn_point : Area2D
+@export var check_point : Area2D
 const JUMP_VELOCITY = -350.0
 const JUMP_TIME = 0.2
 var timer = 0
@@ -37,9 +41,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animation_player = %AnimationPlayer
 @onready var animation_tree = %AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var starting_inventory = [inventory.item1, inventory.item2, inventory.orbs, inventory.shadowPotions, inventory.firePotions, inventory.icePotions]
+@onready var checkpoint_inventory = [inventory.item1, inventory.item2, inventory.orbs, inventory.shadowPotions, inventory.firePotions, inventory.icePotions]
 
 func _ready():
 	self.stats.connect("health_depleted", _on_player_stats_health_depleted)
+	self.stats.connect("no_lives", _on_no_lives)
 	self.inventory.connect("orbsChanged", _on_orb_changed)
 	animation_tree.active = true
 
@@ -193,8 +200,24 @@ func _on_potion_splash():
 	$PotionSplash.play()
 
 func _on_player_stats_health_depleted():
-	gameOver.emit()
-	queue_free()
+	stats.lives -= 1
+	self.global_position = spawn_point.position
+	inventory.item1 = checkpoint_inventory[0]
+	inventory.item2 = checkpoint_inventory[1]
+	inventory.orbs = checkpoint_inventory[2]
+	inventory.shadowPotions = checkpoint_inventory[3]
+	inventory.firePotions = checkpoint_inventory[4]
+	inventory.icePotions = checkpoint_inventory[5]
+	respawn.emit()
+
+func _on_no_lives():
+	inventory.item1 = starting_inventory[0]
+	inventory.item2 = starting_inventory[1]
+	inventory.orbs = starting_inventory[2]
+	inventory.shadowPotions = starting_inventory[3]
+	inventory.firePotions = starting_inventory[4]
+	inventory.icePotions = starting_inventory[5]
+	get_tree().call_deferred("change_scene_to_file", "res://Scenes/game_over.tscn")
 
 func _on_orb_changed():
 	if (inventory.orbs - inventory.old_orbs) > 0:
@@ -212,3 +235,9 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 
 func _on_floating_potion_potion_pickup():
 	$PickupSound.play()
+
+func _on_check_point_body_entered(body):
+	if body == self and spawn_point != check_point:
+		spawn_point = check_point
+		checkpoint_inventory = [inventory.item1, inventory.item2, inventory.orbs, inventory.shadowPotions, inventory.firePotions, inventory.icePotions]
+		newSpawn.emit()

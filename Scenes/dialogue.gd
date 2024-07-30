@@ -69,17 +69,21 @@ func _on_shop_list_leave_leave_shop():
 	final_text = true
 
 func _on_collision_flag_body_entered(body):
-	if !flag_passed:
+	if !flag_passed and body == get_node("../../.."):
 		_on_flag_entered()
 
 func _on_collision_flag_2_body_entered(body):
-	if !flag_passed:
+	if !flag_passed and body == get_node("../../.."):
 		_on_flag_entered()
 
 func _on_collision_flag_3_body_entered(body):
-	if !flag_passed:
+	if !flag_passed and body == get_node("../../.."):
 		_on_flag_entered()
 
 func _on_collision_flag_4_body_entered(body):
-	if !flag_passed:
+	if !flag_passed and body == get_node("../../.."):
+		_on_flag_entered()
+
+func _on_collision_flag_5_body_entered(body):
+	if !flag_passed and body == get_node("../../.."):
 		_on_flag_entered()

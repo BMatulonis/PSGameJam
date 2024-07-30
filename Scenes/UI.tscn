@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xgo5lr0hk21y"]
+[gd_scene load_steps=17 format=3 uid="uid://xgo5lr0hk21y"]
 
 [ext_resource type="Texture2D" uid="uid://civbw2x2fdb2d" path="res://Assets/UI/no_health.png" id="1_mxjas"]
 [ext_resource type="Texture2D" uid="uid://dbwaadjy5wju0" path="res://Assets/UI/empty_health.png" id="2_u5gho"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="8_pf63s"]
 [ext_resource type="Texture2D" uid="uid://cpcmucq2yc6oi" path="res://Assets/UI/item_box.png" id="10_xx1yn"]
 [ext_resource type="PackedScene" uid="uid://gciy433d8knc" path="res://Scenes/pause_menu.tscn" id="11_3cqwn"]
+[ext_resource type="Texture2D" uid="uid://cjq71kxwg5w7r" path="res://Assets/Player/blob_idle.png" id="12_xj3f8"]
+[ext_resource type="Script" path="res://Scenes/PlayerLives.gd" id="13_8vrao"]
 
 [sub_resource type="SystemFont" id="SystemFont_jlroe"]
 font_names = PackedStringArray("ThaleahFat")
@@ -20,13 +22,16 @@ subpixel_positioning = 0
 font_names = PackedStringArray("ThaleahFat")
 subpixel_positioning = 0
 
+[sub_resource type="SystemFont" id="SystemFont_wb816"]
+font_names = PackedStringArray("ThaleahFat")
+
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 138.0
-offset_bottom = 42.0
+offset_left = 23.0
+offset_top = 13.0
+offset_right = 151.0
+offset_bottom = 45.0
 texture_under = ExtResource("1_mxjas")
 texture_over = ExtResource("2_u5gho")
 texture_progress = ExtResource("3_1gdbs")
@@ -36,29 +41,33 @@ script = ExtResource("4_iqahx")
 
 [node name="Item" type="TextureRect" parent="Items"]
 z_index = 2
-offset_left = 15.0
-offset_top = 46.0
-offset_right = 54.0
-offset_bottom = 85.0
+offset_left = 542.0
+offset_top = 10.0
+offset_right = 581.0
+offset_bottom = 49.0
 texture = ExtResource("5_ay57e")
 script = ExtResource("6_7acg7")
+metadata/_edit_use_anchors_ = true
 
 [node name="ItemAmount" type="RichTextLabel" parent="Items"]
-offset_left = 43.0
-offset_top = 47.0
-offset_right = 53.0
-offset_bottom = 59.0
+offset_left = 570.0
+offset_top = 11.0
+offset_right = 580.0
+offset_bottom = 23.0
 theme_override_fonts/normal_font = SubResource("SystemFont_jlroe")
 fit_content = true
+scroll_active = false
 script = ExtResource("8_pf63s")
+metadata/_edit_use_anchors_ = true
 
 [node name="ItemBox" type="TextureRect" parent="Items"]
 z_index = 1
-offset_left = 15.0
-offset_top = 46.0
-offset_right = 55.0
-offset_bottom = 86.0
+offset_left = 542.0
+offset_top = 10.0
+offset_right = 582.0
+offset_bottom = 50.0
 texture = ExtResource("10_xx1yn")
+metadata/_edit_use_anchors_ = true
 
 [node name="Orbs" type="Node" parent="."]
 
@@ -86,6 +95,7 @@ offset_bottom = 23.0
 grow_horizontal = 0
 theme_override_fonts/normal_font = SubResource("SystemFont_bls1f")
 fit_content = true
+scroll_active = false
 script = ExtResource("7_k2vfa")
 metadata/_edit_group_ = true
 
@@ -104,3 +114,20 @@ metadata/_edit_group_ = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_3cqwn")]
 process_mode = 3
+
+[node name="PlayerIcon" type="TextureRect" parent="."]
+offset_left = 30.0
+offset_top = 39.0
+offset_right = 62.0
+offset_bottom = 71.0
+texture = ExtResource("12_xj3f8")
+
+[node name="PlayerLives" type="RichTextLabel" parent="."]
+offset_left = 62.0
+offset_top = 46.0
+offset_right = 77.0
+offset_bottom = 62.0
+theme_override_fonts/normal_font = SubResource("SystemFont_wb816")
+fit_content = true
+scroll_active = false
+script = ExtResource("13_8vrao")

@@ -1,6 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cds5e7jnfyynu"]
+[gd_scene load_steps=6 format=3 uid="uid://cds5e7jnfyynu"]
 
 [ext_resource type="Texture2D" uid="uid://pvly041x2eh4" path="res://Assets/Tiles/floor_tileset.png" id="1_rnlqc"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_tbfnd"]
+tile_data = PackedInt32Array(0, 262144, 0, 1, 393216, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_rour5"]
+tile_data = PackedInt32Array(0, 720896, 0, 1, 851968, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cujiu"]
 texture = ExtResource("1_rnlqc")
@@ -419,6 +425,8 @@ physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "is_shadow"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_cujiu")
+pattern_0 = SubResource("TileMapPattern_tbfnd")
+pattern_1 = SubResource("TileMapPattern_rour5")
 
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource("TileSet_2d2sg")

@@ -23,14 +23,14 @@ enum{
 
 var old_orbs := 0
 
-@onready var item1 = SHADOW:
+@onready var item1 = EMPTY:
 	get:
 		return item1
 	set(value):
 		item1 = value
 		item1Changed.emit()
 
-@onready var item2 = FIRE:
+@onready var item2 = EMPTY:
 	get:
 		return item2
 	set(value):

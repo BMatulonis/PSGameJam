@@ -30,6 +30,7 @@ func _process(delta):
 			self.visible = false
 			paused = false
 		else:
+			_on_options_menu_back_pressed()
 			get_tree().paused = true
 			self.visible = true
 			paused = true
