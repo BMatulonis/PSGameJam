@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://b3akg2clrdcf0"]
+[gd_scene load_steps=23 format=3 uid="uid://b3akg2clrdcf0"]
 
 [ext_resource type="PackedScene" uid="uid://clgq171oe43c2" path="res://Scenes/player.tscn" id="1_i4g6x"]
 [ext_resource type="PackedScene" uid="uid://xgo5lr0hk21y" path="res://Scenes/UI.tscn" id="3_cejfw"]
+[ext_resource type="FontFile" uid="uid://bqk3nly6x4mj4" path="res://ThaleahFat.ttf" id="3_ujyq6"]
 [ext_resource type="Texture2D" uid="uid://bjpcjt38yowp8" path="res://Assets/blob_wizard-Sheet.png" id="4_fmn8g"]
 [ext_resource type="PackedScene" uid="uid://ko3aqeglx2vo" path="res://Scenes/door.tscn" id="5_p6mg5"]
 [ext_resource type="PackedScene" uid="uid://djps8uiwl60q2" path="res://Scenes/dialogue.tscn" id="6_qi218"]
@@ -12,12 +13,6 @@
 [ext_resource type="Script" path="res://Scenes/BuyList.gd" id="8_rcrdo"]
 [ext_resource type="AudioStream" uid="uid://hb3ln4u3g1lw" path="res://Assets/sfx/error.wav" id="10_rx6ar"]
 [ext_resource type="PackedScene" uid="uid://buy7wvdjqn2k7" path="res://Scenes/parallax_background.tscn" id="12_a6mqv"]
-
-[sub_resource type="SystemFont" id="SystemFont_146xl"]
-font_names = PackedStringArray("ThaleahFat")
-
-[sub_resource type="SystemFont" id="SystemFont_lu4y6"]
-font_names = PackedStringArray("ThaleahFat")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_165km"]
 texture = ExtResource("7_xo3cw")
@@ -597,7 +592,7 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "BUY"
 flat = true
@@ -614,9 +609,9 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
-text = "MIX"
+text = "MIX (coming soon)"
 flat = true
 
 [node name="LeaveButton" type="Button" parent="Camera2D/ShopList"]
@@ -631,7 +626,7 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "LEAVE"
 flat = true
@@ -660,28 +655,29 @@ size_flags_vertical = 4
 alignment = 1
 script = ExtResource("8_rcrdo")
 
-[node name="ShadowButton" type="Button" parent="Camera2D/BuyList"]
-layout_mode = 2
-theme_override_colors/font_hover_color = Color(0.674815, 0.674815, 0.674815, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.674815, 0.674815, 0.674815, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
-theme_override_font_sizes/font_size = 24
-text = "Shadow Potion"
-icon = ExtResource("8_ey5sh")
-flat = true
-icon_alignment = 2
-
 [node name="FireButton" type="Button" parent="Camera2D/BuyList"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.674815, 0.674815, 0.674815, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.674815, 0.674815, 0.674815, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
-text = "Fire Potion"
+text = "Fire Potion
+(Out of stock)"
+icon = ExtResource("8_ey5sh")
+flat = true
+icon_alignment = 2
+
+[node name="ShadowButton" type="Button" parent="Camera2D/BuyList"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.674815, 0.674815, 0.674815, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.674815, 0.674815, 0.674815, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ujyq6")
+theme_override_font_sizes/font_size = 24
+text = "Shadow Potion"
 icon = ExtResource("8_ey5sh")
 flat = true
 icon_alignment = 2
@@ -692,7 +688,7 @@ theme_override_colors/font_hover_color = Color(0.674815, 0.674815, 0.674815, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.674815, 0.674815, 0.674815, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "Back"
 flat = true
@@ -732,7 +728,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_lu4y6")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "Leave shop and proceed?"
 horizontal_alignment = 1
@@ -750,7 +746,7 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "YES"
 flat = true
@@ -767,7 +763,7 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_146xl")
+theme_override_fonts/font = ExtResource("3_ujyq6")
 theme_override_font_sizes/font_size = 24
 text = "NO"
 flat = true
@@ -816,7 +812,7 @@ shape = SubResource("CircleShape2D_sx6we")
 
 [node name="Door" parent="." instance=ExtResource("5_p6mg5")]
 position = Vector2(518, 344)
-next_level = "res://Scenes/Levels/level_1.tscn"
+next_level = "res://Scenes/Levels/level_2.tscn"
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("12_a6mqv")]
 

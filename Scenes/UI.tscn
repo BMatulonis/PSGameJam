@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xgo5lr0hk21y"]
+[gd_scene load_steps=15 format=3 uid="uid://xgo5lr0hk21y"]
 
 [ext_resource type="Texture2D" uid="uid://civbw2x2fdb2d" path="res://Assets/UI/no_health.png" id="1_mxjas"]
 [ext_resource type="Texture2D" uid="uid://dbwaadjy5wju0" path="res://Assets/UI/empty_health.png" id="2_u5gho"]
@@ -7,23 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://tn5xpqs3sqwa" path="res://Assets/Items/potion_1.png" id="5_ay57e"]
 [ext_resource type="Script" path="res://Scenes/Item.gd" id="6_7acg7"]
 [ext_resource type="Texture2D" uid="uid://cerbcetplkn6u" path="res://Assets/Items/orb.png" id="6_lepkc"]
+[ext_resource type="FontFile" uid="uid://bqk3nly6x4mj4" path="res://ThaleahFat.ttf" id="7_4b4os"]
 [ext_resource type="Script" path="res://Scenes/OrbCount.gd" id="7_k2vfa"]
 [ext_resource type="Script" path="res://Scenes/ItemAmount.gd" id="8_pf63s"]
 [ext_resource type="Texture2D" uid="uid://cpcmucq2yc6oi" path="res://Assets/UI/item_box.png" id="10_xx1yn"]
 [ext_resource type="PackedScene" uid="uid://gciy433d8knc" path="res://Scenes/pause_menu.tscn" id="11_3cqwn"]
 [ext_resource type="Texture2D" uid="uid://cjq71kxwg5w7r" path="res://Assets/Player/blob_idle.png" id="12_xj3f8"]
 [ext_resource type="Script" path="res://Scenes/PlayerLives.gd" id="13_8vrao"]
-
-[sub_resource type="SystemFont" id="SystemFont_jlroe"]
-font_names = PackedStringArray("ThaleahFat")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_bls1f"]
-font_names = PackedStringArray("ThaleahFat")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_wb816"]
-font_names = PackedStringArray("ThaleahFat")
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -54,7 +44,7 @@ offset_left = 570.0
 offset_top = 11.0
 offset_right = 580.0
 offset_bottom = 23.0
-theme_override_fonts/normal_font = SubResource("SystemFont_jlroe")
+theme_override_fonts/normal_font = ExtResource("7_4b4os")
 fit_content = true
 scroll_active = false
 script = ExtResource("8_pf63s")
@@ -93,7 +83,7 @@ offset_top = 11.0
 offset_right = -11.0
 offset_bottom = 23.0
 grow_horizontal = 0
-theme_override_fonts/normal_font = SubResource("SystemFont_bls1f")
+theme_override_fonts/normal_font = ExtResource("7_4b4os")
 fit_content = true
 scroll_active = false
 script = ExtResource("7_k2vfa")
@@ -127,7 +117,7 @@ offset_left = 62.0
 offset_top = 46.0
 offset_right = 77.0
 offset_bottom = 62.0
-theme_override_fonts/normal_font = SubResource("SystemFont_wb816")
+theme_override_fonts/normal_font = ExtResource("7_4b4os")
 fit_content = true
 scroll_active = false
 script = ExtResource("13_8vrao")

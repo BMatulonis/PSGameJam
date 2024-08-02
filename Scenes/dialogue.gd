@@ -1,6 +1,6 @@
 extends Control
 
-@export var custom_text := "TEXT"
+@export var custom_text : String
 @export var prev_text : Control
 @export var next_text : Control
 @export var shop_list : VBoxContainer

@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
 
+@export var past_checkPoint := false
+
 @onready var collision_shape_2d = $Area2D/CollisionShape2D
 
 var inventory = InventorySystem
@@ -17,7 +19,7 @@ func _on_area_2d_body_entered(body):
 		collision_shape_2d.set_deferred("disabled", true)
 
 func _on_player_respawn():
-	if picked_up and new_spawn:
+	if picked_up and new_spawn and !past_checkPoint:
 		queue_free()
 	else:
 		self.visible = true
@@ -25,5 +27,3 @@ func _on_player_respawn():
 
 func _on_player_new_spawn():
 	new_spawn = true
-	self.visible = true
-	collision_shape_2d.set_deferred("disabled", false)

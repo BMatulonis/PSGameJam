@@ -48,7 +48,7 @@ z_index = -1
 sprite_frames = SubResource("SpriteFrames_ttjcn")
 animation = &"shimmer"
 autoplay = "shimmer"
-frame_progress = 0.68488
+frame_progress = 0.34971
 script = ExtResource("2_qcmna")
 
 [node name="Area2D" type="Area2D" parent="."]

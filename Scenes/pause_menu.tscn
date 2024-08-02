@@ -1,13 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gciy433d8knc"]
+[gd_scene load_steps=4 format=3 uid="uid://gciy433d8knc"]
 
 [ext_resource type="Script" path="res://Scenes/pause_menu.gd" id="1_1y5o0"]
+[ext_resource type="FontFile" uid="uid://bqk3nly6x4mj4" path="res://ThaleahFat.ttf" id="2_rd8nw"]
 [ext_resource type="PackedScene" uid="uid://bvi45m12lfbqe" path="res://Scenes/options_menu.tscn" id="2_wy5a6"]
-
-[sub_resource type="SystemFont" id="SystemFont_w3b5q"]
-font_names = PackedStringArray("ThaleahFat")
-
-[sub_resource type="SystemFont" id="SystemFont_ef4kf"]
-font_names = PackedStringArray("ThaleahFat")
 
 [node name="PauseMenu" type="Control"]
 visible = false
@@ -54,7 +49,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 48
 text = "Paused"
 horizontal_alignment = 1
@@ -78,21 +73,21 @@ layout_mode = 2
 [node name="ResumeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Resume"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
 
@@ -125,7 +120,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 28
 text = "Are you sure?"
 horizontal_alignment = 1
@@ -138,7 +133,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_w3b5q")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 20
 text = "Unsaved progress will be lost"
 horizontal_alignment = 1
@@ -147,21 +142,22 @@ vertical_alignment = 1
 [node name="MainMenuButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Quit to Main Menu"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Quit to Desktop"
 
 [node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ef4kf")
+theme_override_fonts/font = ExtResource("2_rd8nw")
 theme_override_font_sizes/font_size = 24
 text = "Back"
 

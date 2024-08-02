@@ -150,16 +150,19 @@ next_level = "res://Scenes/shop_level.tscn"
 position = Vector2(746, 411)
 
 [node name="ShadowOrb2" parent="Orbs" instance=ExtResource("7_ne0ms")]
-position = Vector2(1475, 220)
+position = Vector2(1454, 220)
 
 [node name="ShadowOrb3" parent="Orbs" instance=ExtResource("7_ne0ms")]
 position = Vector2(1722, 60)
+past_checkPoint = true
 
 [node name="ShadowOrb4" parent="Orbs" instance=ExtResource("7_ne0ms")]
 position = Vector2(2249, 316)
+past_checkPoint = true
 
 [node name="ShadowOrb5" parent="Orbs" instance=ExtResource("7_ne0ms")]
 position = Vector2(2249, 92)
+past_checkPoint = true
 
 [node name="SpawnPoint" type="Area2D" parent="."]
 position = Vector2(322, 368)
@@ -168,7 +171,7 @@ position = Vector2(322, 368)
 shape = SubResource("RectangleShape2D_kci15")
 
 [node name="CheckPoint" type="Area2D" parent="."]
-position = Vector2(1499, 226)
+position = Vector2(1514, 226)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPoint"]
 position = Vector2(-2, -70)

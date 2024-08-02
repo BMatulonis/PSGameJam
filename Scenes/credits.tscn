@@ -1,0 +1,278 @@
+[gd_scene load_steps=15 format=3 uid="uid://gdbwyouwebsi"]
+
+[ext_resource type="Texture2D" uid="uid://vu6ut3xitmrf" path="res://Assets/Tiles/background.png" id="1_bcyau"]
+[ext_resource type="Script" path="res://Scenes/credits.gd" id="1_csktt"]
+[ext_resource type="Texture2D" uid="uid://dwgv68so64qar" path="res://Assets/Player/blob_idle-Sheet.png" id="2_1gpjf"]
+[ext_resource type="FontFile" uid="uid://bqk3nly6x4mj4" path="res://ThaleahFat.ttf" id="3_t7m6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o4t2"]
+atlas = ExtResource("2_1gpjf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr43i"]
+atlas = ExtResource("2_1gpjf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgcrf"]
+atlas = ExtResource("2_1gpjf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00clq"]
+atlas = ExtResource("2_1gpjf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3ruk"]
+atlas = ExtResource("2_1gpjf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5jmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o4t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr43i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgcrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00clq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3ruk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_3e4fd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4t36t"]
+resource_name = "default"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_cyac1"]
+resource_name = "look_up"
+length = 0.2
+step = 0.2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t42jg"]
+_data = {
+"RESET": SubResource("Animation_3e4fd"),
+"default": SubResource("Animation_4t36t"),
+"look_up": SubResource("Animation_cyac1")
+}
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_csktt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -336.0
+offset_top = -201.0
+offset_right = 341.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bcyau")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -193.0
+offset_right = 336.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172549, 0.172549, 0.172549, 0.2)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -81.5
+offset_right = 121.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 24
+text = "Unfortunately, that is the end of the demo (for now)."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 24
+text = "Thank you so much for playing!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 24
+text = "This was my first game jam and I had a blast."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 24
+text = "Until next time!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 36
+text = "Return to main menu"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(-236, 89)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_a5jmr")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_t42jg")
+}
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 238.0
+offset_top = 157.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_t7m6p")
+theme_override_font_sizes/font_size = 16
+text = "- Brandon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_button_down"]

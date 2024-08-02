@@ -6,6 +6,13 @@ extends VBoxContainer
 @onready var shop_list = $"../ShopList"
 @onready var error_sound = $ErrorSound
 
+enum{
+	EMPTY = 0,
+	SHADOW = 1,
+	FIRE = 2,
+	ICE = 3
+}
+
 func _ready():
 	shadow_button.button_down.connect(_shadow_pressed)
 	fire_button.button_down.connect(_fire_pressed)
@@ -19,11 +26,15 @@ func _shadow_pressed() -> void:
 		error_sound.play()
 
 func _fire_pressed() -> void:
-	if InventorySystem.orbs > 0:
-		InventorySystem.orbs -= 1
-		InventorySystem.firePotions += 1
-	else:
-		error_sound.play()
+	#if InventorySystem.item1 == EMPTY:
+		#InventorySystem.item1 == FIRE
+	#elif InventorySystem.item2 == EMPTY:
+		#InventorySystem.item2 == FIRE
+	#if InventorySystem.orbs > 0:
+		#InventorySystem.orbs -= 1
+		#InventorySystem.firePotions += 1
+	#else:
+	error_sound.play()
 
 func _back_pressed() -> void:
 	self.visible = false

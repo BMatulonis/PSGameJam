@@ -2,6 +2,7 @@ extends RigidBody2D
 
 signal shadowAdded(body_rid, body, body_shape_index, local_shape_index)
 signal potionSplash
+signal enemyHit
 
 var spawnPos : Vector2
 var spawnRot : float
@@ -38,7 +39,11 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 				#check neighbors
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
 				check_neighbors(body, cell, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
+
 	if body != get_parent():
+		if body is CharacterBody2D:
+			enemyHit.emit()
+			body.queue_free()
 		potionSplash.emit()
 		queue_free()
 

@@ -1,11 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://djps8uiwl60q2"]
 
 [ext_resource type="Script" path="res://Scenes/dialogue.gd" id="1_6kkw4"]
+[ext_resource type="FontFile" uid="uid://bqk3nly6x4mj4" path="res://ThaleahFat.ttf" id="2_b8vqd"]
 [ext_resource type="AudioStream" uid="uid://c8ku2jyxc4vbl" path="res://Assets/sfx/blipSelect.wav" id="2_boeo4"]
-
-[sub_resource type="SystemFont" id="SystemFont_a762n"]
-font_names = PackedStringArray("ThaleahFat")
-subpixel_positioning = 0
 
 [sub_resource type="Animation" id="Animation_7iabx"]
 length = 0.001
@@ -70,7 +67,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_a762n")
+theme_override_fonts/font = ExtResource("2_b8vqd")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1

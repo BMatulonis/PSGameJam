@@ -29,5 +29,3 @@ func _on_player_respawn():
 
 func _on_player_new_spawn():
 	new_spawn = true
-	self.visible = true
-	collision_shape_2d.set_deferred("disabled", false)

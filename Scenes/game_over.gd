@@ -9,4 +9,6 @@ func _on_yes_button_button_down():
 	get_tree().change_scene_to_file(PlayerStats.current_level)
 
 func _on_no_button_button_down():
+	PlayerStats.reset_stats()
+	InventorySystem.reset_inventory()
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

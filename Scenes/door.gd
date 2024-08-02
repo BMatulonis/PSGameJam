@@ -5,10 +5,12 @@ extends AnimatedSprite2D
 var in_door = false
 
 func _on_area_2d_body_entered(body):
-	in_door = true
+	if body == get_node("../Player"):
+		in_door = true
 
 func _on_area_2d_body_exited(body):
-	in_door = false
+	if body == get_node("../Player"):
+		in_door = false
 
 func _input(event):
 	if event.is_action_pressed("up") and in_door:
